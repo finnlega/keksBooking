@@ -35,4 +35,45 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomInt(0, elements.length-1)];
 };
 
-export {getRandomInt, getRandomlocation, getRandomArrayElement};
+// Функция создает новый случайный массив.
+const createArray = function (array) {
+
+  const indexArray = [getRandomInt(0, array.length-1)];
+  // console.log('Новый массив ограничен индексом:'+ ' ' + indexArray);
+  const newArray = [];
+  for (let i = 0; i <= indexArray; i++) {
+    newArray.push(array[i]);
+  }
+
+  return newArray;
+};
+
+// Функция заполяет случайными элементами массива features
+const createItem = function (firstElement, secondElement) {
+  for (let j = 0; j <= firstElement.length-1; j++) {
+    firstElement[j].textContent = secondElement[j];
+    if (firstElement[j].textContent === '') {
+      firstElement[j].classList.add('hidden');
+    }
+  }
+  return function () {
+
+    return firstElement.textContent = secondElement;
+  }
+};
+
+// Функция добавления массива photo
+const createPhoto = function (firstItem, secondItem, parentItem) {
+  firstItem.remove();
+  for (let i = 0; i < secondItem.length; i++) {
+    firstItem.src = secondItem[i];
+    parentItem.appendChild(firstItem.cloneNode());
+  }
+
+  return function () {
+
+    return firstItem.src = secondItem;
+  }
+}
+
+export {getRandomInt, getRandomlocation, getRandomArrayElement, createArray, createItem, createPhoto};

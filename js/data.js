@@ -1,4 +1,4 @@
-import {getRandomInt, getRandomlocation, getRandomArrayElement } from './util.js';
+import {getRandomInt, getRandomlocation, getRandomArrayElement, createArray } from './util.js';
 
 const SIMILAR_ADVERTISEMENT_COUNT = 10;
 
@@ -64,9 +64,9 @@ const getAdvertisement = () => {
     guests: getRandomInt(1, 10),
     checkin: getRandomArrayElement(OFFER.checkin),
     checkout: getRandomArrayElement(OFFER.checkout),
-    features: getRandomArrayElement(OFFER.features),
+    features: createArray(OFFER.features),
     descriptions: OFFER.description,
-    photos: getRandomArrayElement(OFFER.photos),
+    photos: createArray(OFFER.photos),
   };
 };
 
@@ -74,4 +74,3 @@ const similarAdvertisement = new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).m
 // console.log(similarAdvertisement);
 
 export {similarAdvertisement};
-
