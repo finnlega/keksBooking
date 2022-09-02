@@ -76,4 +76,17 @@ const createPhoto = function (firstItem, secondItem, parentItem) {
   }
 }
 
-export {getRandomInt, getRandomlocation, getRandomArrayElement, createArray, createItem, createPhoto};
+// Функция синхронизации полей формы
+const synchronizeField = (formfield, selectValues) => {
+  formfield.addEventListener('change',  function() {
+    const currentValue = this.value;
+
+    for (let i = 0; i <= selectValues.length-1; i++ ) {
+      if (currentValue === selectValues[i].value) {
+        selectValues[i].selected = true;
+      }
+    }
+  });
+};
+
+export {getRandomInt, getRandomlocation, getRandomArrayElement, createArray, createItem, createPhoto, synchronizeField};
