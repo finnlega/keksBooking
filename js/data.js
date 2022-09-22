@@ -13,7 +13,7 @@ const NUMBER_DECIMAL_PLACES = 5;
 
 const AUTHOR = {
   avatar: () => {
-    return 'img/avatars/user0' + getRandomInt(1,10) + '.png';
+    return 'img/avatars/user0' + getRandomInt(1,8) + '.png';
   },
 };
 
