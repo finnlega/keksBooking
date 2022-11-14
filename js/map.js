@@ -1,12 +1,11 @@
-import {similarAdvertisement} from './data.js';
 import {setStateForm, addressForm} from './form.js';
 import {createCustomPopup} from './cards.js';
+import {resetForm, form, mapFilters} from './form.js';
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-    // console.log('Карта инициализирована');
-    setStateForm(false);
-  })
+const map = L.map('map-canvas');
+map.on('load', () => {
+  setStateForm(false);
+})
   .setView({
     lat: 35.6895,
     lng: 139.692,
@@ -22,6 +21,7 @@ L.tileLayer(
 // добавляем главный маркер с координатами центра Токио
 
 const mainPinIcon = L.icon({
+
   iconUrl: '../leaflet/img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
@@ -48,35 +48,78 @@ const setCoordinate = () => {
   return addressForm.value;
 };
 
-defaultMarker.addTo(map);
-addressForm.value = defaultMarker.getLatLng();
-setCoordinate();
+const setmarker = () => {
+  defaultMarker.addTo(map);
+  addressForm.value = defaultMarker.getLatLng();
+  setCoordinate();
+};
+
+setmarker();
 
 defaultMarker.on('moveend', (evt) => {
   addressForm.value = evt.target.getLatLng();
   setCoordinate();
 });
 
+let layerGroup = L.layerGroup().addTo(map);
+layerGroup.clearLayers();
+
 // добавляем обычные маркеры с координатами похожих обьявлений
 
-const regularPinIcon = L.icon ({
-  iconUrl: '../leaflet/img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
+const setPin = (data) => {
+  const regularPinIcon = L.icon ({
+    iconUrl: '../leaflet/img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+  // let layerGroup = L.layerGroup().addTo(map);
+  // layerGroup.clearLayers();
+  for (let i = 0; i <= data.length-1; i++) {
+    const {location} = data[i];
+    const marker = L.marker(
+      {
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        icon: regularPinIcon,
+      },
+    );
 
-for (let i = 0; i <= similarAdvertisement.length-1; i++) {
-  const {address} = similarAdvertisement[i];
-  const marker = L.marker(
-    {
-      lat: address.match(/\d+\.\d+/gm)[0],
-      lng: address.match(/\d+\.\d+/gm)[1],
-    },
-    {
-      icon: regularPinIcon,
-    },
-  );
-
-  marker.addTo(map);
-  marker.bindPopup(createCustomPopup(similarAdvertisement[i]));
+    marker.addTo(layerGroup);
+    marker.bindPopup(createCustomPopup(data[i]));
+  }
 }
+
+// Сброс формы к настройкам по-умолчанию по кнопке reset
+
+const resetfieldForm = () => {
+  resetForm.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    form.reset();
+    mapFilters.reset();
+    map.removeLayer(defaultMarker);
+    defaultMarker.setLatLng({lat:35.6895, lng:139.692});
+    setmarker();
+  });
+};
+
+resetfieldForm();
+
+// Восстановление полей формы в первоначальное состояние после публикации
+
+const reverseFormState =  () => {
+  form.reset();
+  mapFilters.reset();
+  map.removeLayer(defaultMarker);
+  defaultMarker.setLatLng({lat:35.6895, lng:139.692});
+  setmarker();
+};
+
+// Удаление всех маркеров на карте
+
+const deletePin = () => {
+  layerGroup.clearLayers();
+}
+
+export {setPin, resetfieldForm, reverseFormState, deletePin};

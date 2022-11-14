@@ -1,4 +1,9 @@
-import {getRandomInt, getRandomlocation, getRandomArrayElement, createArray } from './util.js';
+// Тестовые данные
+
+import { getRandomInt } from './util.js';
+import { getRandomlocation } from './util.js';
+import { getRandomArrayElement} from './util.js';
+import { createArray } from './util.js';
 
 const SIMILAR_ADVERTISEMENT_COUNT = 10;
 
@@ -27,7 +32,7 @@ const LOCATION = {
 };
 
 const OFFER = {
-  title: 'Жилье',
+  title: 'Жилье, как в раю',
   address: () => {
     return LOCATION.x() + ', '+ LOCATION.y();
   },
@@ -71,6 +76,6 @@ const getAdvertisement = () => {
 };
 
 const similarAdvertisement = new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).map(() => getAdvertisement());
-// console.log(similarAdvertisement);
 
-export {similarAdvertisement};
+export { similarAdvertisement};
+

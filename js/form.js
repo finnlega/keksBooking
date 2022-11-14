@@ -1,9 +1,13 @@
-import { synchronizeField } from './util.js';
-
+import { synchronizeField  } from './util.js';
+// const MIN_TITLE_LENGTH = 30;
+// const MAX_TITLE_LENGTH = 100;
+// const MAX_PRICE =1000000;
 let minPrice = 0;
+
 const form = document.querySelector('.ad-form');
 const fieldsetForm = form.querySelectorAll('.ad-form__element');
 const formHeader = form.querySelector('.ad-form-header');
+const resetForm  = form.querySelector('.ad-form__reset');
 
 // Фильтры
 
@@ -20,17 +24,14 @@ const formTimeIn = form.querySelector('#timein');
 const timeIn = formTimeIn.children;
 const formTimeOut = form.querySelector('#timeout');
 const timeOut = formTimeOut.children;
-const addressForm =  document.getElementById('address');
+const addressForm =  document.querySelector('#address');
+const formRoomNumber = form.querySelector('#room_number');
+const formCapacity = form.querySelector('#capacity');
+// const formDescription = form.querySelector('#description');
+// const formFeatures = form.querySelector('.features');
+// const formFeature = formFeatures.children;
 
-// let arrayType = [];
-
-// for (let iterator of typeSelect) {
-//   arrayType.push(iterator.value);
-// }
-// console.log(arrayType);
-// console.log(formPrice);
-
-const ckeckPrice = () => {
+const ckeckPrice = () =>{
   formType.addEventListener('change', () => {
     if (formType.value === 'bungalow') {
       formPrice.placeholder = 0;
@@ -55,6 +56,7 @@ const ckeckPrice = () => {
 ckeckPrice();
 synchronizeField(formTimeIn,timeOut);
 synchronizeField(formTimeOut,timeIn);
+
 
 // устанавливаем disabled для родителей элементов формы и навешиваем класс .ad-form--disabled для самой формы и фильтров
 
@@ -94,5 +96,130 @@ const setStateForm = (state) => {
 
 setStateForm(true);
 
-export {setStateForm, addressForm, form, formPrice, formTitle, minPrice};
+// // Проверки на заполнение полей формы
+
+// // Проверка заголовка формы
+
+// formTitle.addEventListener('input', ()=> {
+
+//   const valueLength = formTitle.value.length;
+
+//   if (valueLength < MIN_TITLE_LENGTH) {
+//     formTitle.setCustomValidity(`Ещё ${(MIN_TITLE_LENGTH - valueLength)} симв.`);
+//   } else if (valueLength > MAX_TITLE_LENGTH) {
+//     formTitle.setCustomValidity(`Удалите лишние ${(valueLength - MAX_TITLE_LENGTH)} симв.`);
+//   } else {
+//     formTitle.setCustomValidity('');
+//   }
+
+//   formTitle.reportValidity();
+// });
+
+// // Проверка минимальной цены
+
+// const enterPrice = () => {
+//   formPrice.addEventListener('input', () => {
+//     const valuePrice = formPrice.value;
+//     if (valuePrice > MAX_PRICE ) {
+//       formPrice.setCustomValidity(`Вы ввели цену превышающую ${MAX_PRICE} руб` );
+//     } else if (valuePrice < minPrice) {
+//       formPrice.setCustomValidity(`Вы ввели цену меньше минимальной на ${minPrice - valuePrice} рублей`);
+//     }
+//     else {
+//       formPrice.setCustomValidity('');
+//     }
+//     formPrice.reportValidity();
+//   });
+
+// };
+
+// enterPrice();
+
+// // Проверка соответствия кол-ва комнат кол-ву мест.
+
+// // 1 комната — «для 1 гостя»;
+// // 2 комнаты — «для 2 гостей» или «для 1 гостя»;
+// // 3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
+// // 100 комнат — «не для гостей».
+
+// const chooseRooms = () => {
+//   const defaultValue = formRoomNumber.value;
+//   for (let i = 0; i < formCapacity.length; i++) {
+//     if (formCapacity[i].value === defaultValue) {
+//       formCapacity[i].disabled = false;
+//     } else {
+//       formCapacity[i].disabled = true;
+//     }
+//   }
+
+//   formRoomNumber.addEventListener('change', () => {
+//     const currentValue = formRoomNumber.value;
+//     for (let j = 0; j < formCapacity.length; j++) {
+//       if (Number(currentValue) === 100) {
+//         if (Number(formCapacity[j].value) !== 0) {
+//           formCapacity[j].disabled = true;
+//         }
+//         else {
+//           formCapacity[j].disabled = false;
+//         }
+//       } else if (Number(currentValue) >= Number(formCapacity[j].value) && (Number(formCapacity[j].value) !== 0)) {
+//         formCapacity[j].disabled = false;
+//       } else if (Number(currentValue) !== Number(formCapacity[j].value) && Number(currentValue) !== 100) {
+//         formCapacity[j].disabled = true;
+//       }
+//     }
+//   });
+// };
+
+// chooseRooms();
+
+// Поля формы при нажатии кнопки "Очистить"
+
+// const setFieldFormDefault = () => {
+//   formTitle.value = '';
+//   formType.value = 'flat';
+//   formPrice.value = '';
+//   formTimeIn.value = '12:00';
+//   formTimeOut.value = '12:00';
+//   formRoomNumber.value = '1';
+//   formCapacity.value = '1';
+//   formDescription.value = '';
+// };
+
+
+// const sendUserFormSubmit = () => {
+
+//   form.addEventListener('submit', (evt)=>{
+
+//     evt.preventDefault();
+//     const formData = new FormData(evt.target);
+//     fetch(
+//       'https://23.javascript.pages.academy/keksobooking',
+//       {
+//         method: 'POST',
+//         body: formData,
+//       },
+
+//     )
+//       .then((response) => {
+//         if (response.ok) {
+//           console.log('done');
+//           // resetfieldForm();
+
+//           // document.appendChild(showMessageSuccess());
+//           // onSuccess();
+
+//         } else {
+//           showAlert('Фиг вам');
+//         }
+//       })
+//       .catch(() => {
+//         // showMessageSuccess();
+//         showAlert('Как же так');
+//       });
+//   });
+// };
+
+
+export { setStateForm, addressForm, form, formTitle, formPrice, formRoomNumber, formCapacity, minPrice, resetForm, mapFilters };
 

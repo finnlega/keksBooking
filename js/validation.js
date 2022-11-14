@@ -1,10 +1,11 @@
-import {form, formTitle, formPrice, minPrice} from './form.js';
+import { formTitle, formPrice, formRoomNumber, formCapacity, minPrice} from './form.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE =1000000;
-const formRoomNumber = form.querySelector('#room_number');
-const formCapacity = form.querySelector('#capacity');
+
+// const formRoomNumber = form.querySelector('#room_number');
+// const formCapacity = form.querySelector('#capacity');
 
 // Проверки на заполнение полей формы
 
@@ -28,7 +29,9 @@ formTitle.addEventListener('input', ()=> {
 // Проверка минимальной цены
 
 const enterPrice = () => {
+
   formPrice.addEventListener('input', () => {
+
     const valuePrice = formPrice.value;
     if (valuePrice > MAX_PRICE ) {
       formPrice.setCustomValidity(`Вы ввели цену превышающую ${MAX_PRICE} руб` );
@@ -47,10 +50,10 @@ enterPrice();
 
 // Проверка соответствия кол-ва комнат кол-ву мест.
 
-// // 1 комната — «для 1 гостя»;
-// // 2 комнаты — «для 2 гостей» или «для 1 гостя»;
-// // 3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
-// // 100 комнат — «не для гостей».
+// 1 комната — «для 1 гостя»;
+// 2 комнаты — «для 2 гостей» или «для 1 гостя»;
+// 3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
+// 100 комнат — «не для гостей».
 
 const chooseRooms = () => {
   const defaultValue = formRoomNumber.value;
