@@ -3,7 +3,7 @@ import {showAlert} from './util.js';
 import {form} from './form.js';
 import {showMessageSuccess, closeModalWindow} from './success.js';
 import {showMessageError, closeModalWindowError} from './error.js';
-import {filterHouseType} from './filters.js';
+import {setData} from './storage.js';
 
 const SIMILAR_ADVERTISEMENT_COUNT = 10;
 
@@ -16,7 +16,7 @@ const getData = () => {
     })
     .then((json) => {
       setPin(json.slice(0, SIMILAR_ADVERTISEMENT_COUNT));
-      filterHouseType(json);
+      setData(json);
     })
     .catch(() => {
       showAlert('Не все данные загрузились. Попробуйте ещё раз');

@@ -122,4 +122,8 @@ const deletePin = () => {
   layerGroup.clearLayers();
 }
 
-export {setPin, resetfieldForm, reverseFormState, deletePin};
+const deleteMarker = (marker) => {
+  layerGroup.removeLayer(marker);
+}
+
+export {setPin, resetfieldForm, reverseFormState, deletePin, deleteMarker};
