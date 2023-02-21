@@ -4,9 +4,6 @@ const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE =1000000;
 
-// const formRoomNumber = form.querySelector('#room_number');
-// const formCapacity = form.querySelector('#capacity');
-
 // Проверки на заполнение полей формы
 
 // // Проверка заголовка формы

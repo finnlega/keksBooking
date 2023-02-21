@@ -1,7 +1,5 @@
 import { synchronizeField  } from './util.js';
-// const MIN_TITLE_LENGTH = 30;
-// const MAX_TITLE_LENGTH = 100;
-// const MAX_PRICE =1000000;
+
 let minPrice = 0;
 
 const form = document.querySelector('.ad-form');
@@ -27,9 +25,6 @@ const timeOut = formTimeOut.children;
 const addressForm =  document.querySelector('#address');
 const formRoomNumber = form.querySelector('#room_number');
 const formCapacity = form.querySelector('#capacity');
-// const formDescription = form.querySelector('#description');
-// const formFeatures = form.querySelector('.features');
-// const formFeature = formFeatures.children;
 
 const ckeckPrice = () =>{
   formType.addEventListener('change', () => {

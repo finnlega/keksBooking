@@ -5,3 +5,5 @@ import './validation.js';
 import './api.js';
 import './filters.js';
 import './storage.js';
+import './avatar.js';
+import './photo.js';
