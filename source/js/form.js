@@ -26,15 +26,16 @@ const addressForm =  document.querySelector('#address');
 const formRoomNumber = form.querySelector('#room_number');
 const formCapacity = form.querySelector('#capacity');
 
-const ckeckPrice = () =>{
+const ckeckPrice = () => {
   formType.addEventListener('change', () => {
+
     if (formType.value === 'bungalow') {
       formPrice.placeholder = 0;
       minPrice = 0;
     } else if (formType.value === 'flat') {
       formPrice.placeholder = 1000;
       minPrice = 1000;
-    } else if (formType === 'hotel') {
+    } else if (formType.value === 'hotel') {
       formPrice.placeholder = 3000;
       minPrice = 3000;
     } else if (formType.value === 'house') {

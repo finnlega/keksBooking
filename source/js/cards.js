@@ -14,6 +14,9 @@ const createCustomPopup = (point) => {
     case 'palace':
       popupElement.querySelector('.popup__type').textContent = 'Дворец';
       break;
+      case 'hotel':
+      popupElement.querySelector('.popup__type').textContent = 'Отель';
+      break;
     case 'house':
       popupElement.querySelector('.popup__type').textContent = 'Дом';
       break;

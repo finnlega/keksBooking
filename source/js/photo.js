@@ -6,7 +6,7 @@ const fileChoosen = form.querySelector('#images');
 const image = document.createElement('img');
 image.style.width = '70px';
 image.style.height = '70px';
-image.setAttribute('alt', 'Фотография жилья');
+// image.setAttribute('alt', 'Фотография жилья');
 image.classList.add('ad-form__photo--image');
 previewPhoto.appendChild(image);
 

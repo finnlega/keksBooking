@@ -42,6 +42,7 @@ const handleCheckboxChange = () => {
 
 const filterType = (type, cb) => {
   type.addEventListener('change', () => {
+    console.log(getData());
     cb();
   })
 }
