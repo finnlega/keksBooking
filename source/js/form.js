@@ -57,7 +57,7 @@ synchronizeField(formTimeOut,timeIn);
 // устанавливаем disabled для родителей элементов формы и навешиваем класс .ad-form--disabled для самой формы и фильтров
 
 const setStateForm = (state) => {
-  if (state === true) {
+  if (state) {
     form.classList.add('.ad-form--disabled');
     formHeader.disabled = true;
     addressForm.disabled = true;

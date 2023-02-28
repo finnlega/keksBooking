@@ -5,6 +5,7 @@ const Keys = {
 }
 
 // Получение целого числа из диапазона
+
 const getRandomInt = (min, max) => {
   if (max < 0 || min < 0) {
     return -1;
@@ -44,43 +45,40 @@ const getRandomArrayElement = (elements) => {
 
 // Создать новый случайный массив
 
-const createArray = function (array) {
+const createArray = (array) => {
 
   const indexArray = [getRandomInt(0, array.length-1)];
-  // console.log('Новый массив ограничен индексом:'+ ' ' + indexArray);
-  const newArray = [];
+  const data = [];
   for (let i = 0; i <= indexArray; i++) {
-    newArray.push(array[i]);
+    data.push(array[i]);
   }
 
-  return newArray;
+  return data;
 };
 
 // Заполнить случайными элементами массива (features)
 
-const createItem = function (firstElement, secondElement) {
+const createItem = (firstElement, secondElement) => {
   for (let j = 0; j <= firstElement.length-1; j++) {
     firstElement[j].textContent = secondElement[j];
     if (firstElement[j].textContent === '') {
       firstElement[j].classList.add('hidden');
     }
   }
-  return function () {
-
+  return () => {
     return firstElement.textContent = secondElement;
   }
 };
 
 // Добавить массив (photo)
-const createPhoto = function (firstItem, secondItem, parentItem) {
+
+const createPhoto = (firstItem, secondItem, parentItem) => {
   firstItem.remove();
   for (let i = 0; i < secondItem.length; i++) {
     firstItem.src = secondItem[i];
     parentItem.appendChild(firstItem.cloneNode());
   }
-
-  return function () {
-
+  return () => {
     return firstItem.src = secondItem;
   }
 }
@@ -88,7 +86,7 @@ const createPhoto = function (firstItem, secondItem, parentItem) {
 // Синхронизация полей формы
 
 const synchronizeField = (formfield, selectValues) => {
-  formfield.addEventListener('change',  function() {
+  formfield.addEventListener('change',  () => {
     const currentValue = this.value;
 
     for (let i = 0; i <= selectValues.length-1; i++ ) {
@@ -125,6 +123,5 @@ const showAlert = (message) => {
 const checkEsc = (evt) => {
   return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
 }
-
 
 export { getRandomInt, getRandomlocation, getRandomArrayElement, createArray, createItem, createPhoto, synchronizeField, showAlert, checkEsc };

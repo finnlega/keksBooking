@@ -42,7 +42,6 @@ const handleCheckboxChange = () => {
 
 const filterType = (type, cb) => {
   type.addEventListener('change', () => {
-    console.log(getData());
     cb();
   })
 }
@@ -110,14 +109,13 @@ const checkFifth = (element, param, filterFeaturesIsTrue) => {
       }
     }
   } catch (err) {
-    console.log('error');
   }
 }
 
 const filters = () => {
-  let array = [];
-  array = getData();
-  const result = array.filter( element => (checkFirst(element, housingType) && checkSecond(element, housingRooms) && checkThird(element, housingPrice) && checkFourth(element, housingGuests)
+  let data = [];
+  data = getData();
+  const result = data.filter( element => (checkFirst(element, housingType) && checkSecond(element, housingRooms) && checkThird(element, housingPrice) && checkFourth(element, housingGuests)
                                             && checkFifth(element, checkboxWifi, isWifiChecked) && checkFifth(element, checkboxDishwasher, isDishwasherChecked)
                                             && checkFifth(element, checkboxParking, isParkingChecked) && checkFifth(element, checkboxWasher, isWasherChecked)
                                             && checkFifth(element, checkboxElevator, isElevatorChecked) && checkFifth(element, checkboxConditioner, isConditionerChecked)));
@@ -126,7 +124,6 @@ const filters = () => {
     setPin(result.slice(0, SIMILAR_ADVERTISEMENT_COUNT));
   } else {
     deletePin();
-    console.log('подходящих вариантов не найдено');
   }
 }
 
